@@ -6,15 +6,16 @@ import sys
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
 import time
 
-cells=[[0 for i in range(8)]for j in range(8)]
+FIELD=8
+cells=[[0 for i in range(FIELD)]for j in range(FIELD)]
 turn =True
 
 
 def drawingReversi():
 	raw=[" " for i in xrange(9)]
 	raw[8]=" --------"
-	for j in xrange(8):
-		for i in xrange(8):
+	for j in xrange(FIELD):
+		for i in xrange(FIELD):
 			if cells[j][i]==0:
 				raw[j]+="0"
 			elif cells[j][i]==1:
@@ -22,7 +23,7 @@ def drawingReversi():
 			else:
 				raw[j]+="2"
 		print raw[j].decode("utf-8")
-	print raw[8]
+	print raw[FIELD]
 
 def put(_posX,_posY):
 	global turn
@@ -45,7 +46,7 @@ def canPutStone(_posX,_posY,_vecX,_vecY):
 	_posX+=_vecX
 	_posY+=_vecY
 
-	if _posX<0 or _posX>7 or _posY<0 or _posY>7:
+	if _posX<0 or _posX>FIELD-1 or _posY<0 or _posY>FIELD-1:
 		return False
 
 	if cells[_posX][_posY]==putStone:
@@ -56,7 +57,7 @@ def canPutStone(_posX,_posY,_vecX,_vecY):
 	_posX+=_vecX
 	_posY+=_vecY
 
-	while (_posX>=0 and _posX< 8 and _posY>=0 and _posY<8):
+	while (_posX>=0 and _posX< FIELD and _posY>=0 and _posY<FIELD):
 		 if cells[_posX][_posY]==0:
 		 	return False
 
@@ -72,7 +73,7 @@ def canPutStone(_posX,_posY,_vecX,_vecY):
 
 
 def canPut(_posX,_posY):
-	if _posX>=8 or _posY>=8:
+	if _posX>=FIELD or _posY>=FIELD:
 		return False
 	if cells[_posX][_posY]!=0:
 		return False
@@ -150,15 +151,17 @@ if __name__=="__main__":
 				if canPut(int(data[1]),int(data[0])):
 					put(int(data[1]),int(data[0]))
 					reverseStone(int(data[1]),int(data[0]))
+					
+					drawingReversi()
+
 					if turn:
 						print"next Player 2"
 					else:
 						print"next Player 1"
-					drawingReversi()
 
 					turn= not turn
 
 				else:
 					print "not putable"
 			else:
-				print "Syntax Error(posX(0<=posX<8) posY(0<=posY<8))"
+				print "Syntax Error(posX(0<=posX<FIELD) posY(0<=posY<FIELD))"

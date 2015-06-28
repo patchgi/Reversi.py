@@ -140,7 +140,8 @@ if __name__=="__main__":
 	cells [4][3]=2
 	cells [4][4]=1
 
-
+	drawingReversi()
+	
 	while True:
 		input=raw_input()
 		time.sleep(1)

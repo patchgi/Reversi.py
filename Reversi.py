@@ -175,6 +175,8 @@ if __name__=="__main__":
 			put(x,y)
 			reverseStone(x,y)
 
+			print str(x)+" "+str(y)
+
 			drawingReversi()
 
 			print"next Player 1"

@@ -155,8 +155,10 @@ if __name__=="__main__":
 
 			if blackStone>whiteStone:
 				print "black WIN"
+				break
 			elif blackStone<whiteStone:
 				print "white WIN"
+				break
 
 			else:
 				print "DRAW"
@@ -228,4 +230,4 @@ if __name__=="__main__":
 
 			print"next Player 1"
 
-			turn= not turn
+			turn= not tur

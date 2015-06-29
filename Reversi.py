@@ -138,9 +138,32 @@ if __name__=="__main__":
 	cells [4][3]=2
 	cells [4][4]=1
 
+	playCount=0
+	blackStone=0
+	whiteStone=0
+
 	drawingReversi()
 
 	while True:
+		if playCount==60:
+			for i in xrange(FIELD):
+				for j in xrange(FIELD):
+					if cells[i][j]==1:
+						blackStone+=1
+					if cells[i][j]==2:
+						whiteStone+=1
+
+			if blackStone>whiteStone:
+				print "black WIN"
+			elif blackStone<whiteStone:
+				print "white WIN"
+
+			else:
+				print "DRAW"
+
+
+
+
 		canCount=0
 		if turn:
 
@@ -162,6 +185,7 @@ if __name__=="__main__":
 				if len(data)==2:
 					if canPut(int(data[1]),int(data[0])):
 						put(int(data[1]),int(data[0]))
+						playCount+=1
 						reverseStone(int(data[1]),int(data[0]))
 
 						drawingReversi()
@@ -195,6 +219,7 @@ if __name__=="__main__":
 					break
 
 			put(x,y)
+			playCount+=1
 			reverseStone(x,y)
 
 			print str(y)+" "+str(x)
@@ -204,8 +229,3 @@ if __name__=="__main__":
 			print"next Player 1"
 
 			turn= not turn
-
-
-
-
-

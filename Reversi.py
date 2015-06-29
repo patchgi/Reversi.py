@@ -4,6 +4,7 @@
 import codecs
 import sys
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
+import random
 import time
 
 FIELD=8
@@ -66,9 +67,6 @@ def canPutStone(_posX,_posY,_vecX,_vecY):
 
 		 _posX+=_vecX
 		 _posY+=_vecY
-
-
-
 
 
 
@@ -141,28 +139,49 @@ if __name__=="__main__":
 	cells [4][4]=1
 
 	drawingReversi()
-	
+
 	while True:
-		input=raw_input()
-		time.sleep(1)
+		if turn:
+			input=raw_input()
+			time.sleep(1)
 	
-		if input!= None:
-			data=input.split(" ")
-			if len(data)==2:
-				if canPut(int(data[1]),int(data[0])):
-					put(int(data[1]),int(data[0]))
-					reverseStone(int(data[1]),int(data[0]))
+			if input!= None:
+				data=input.split(" ")
+				if len(data)==2:
+					if canPut(int(data[1]),int(data[0])):
+						put(int(data[1]),int(data[0]))
+						reverseStone(int(data[1]),int(data[0]))
 					
-					drawingReversi()
+						drawingReversi()
 
-					if turn:
 						print"next Player 2"
+
+						turn= not turn
+
 					else:
-						print"next Player 1"
-
-					turn= not turn
-
+						print "not putable"
 				else:
-					print "not putable"
-			else:
-				print "Syntax Error(posX(0<=posX<FIELD) posY(0<=posY<FIELD))"
+					print "Syntax Error(posX(0<=posX<FIELD) posY(0<=posY<FIELD))"
+		else:
+			time.sleep(1)
+			x=0
+			y=0
+			while(True):
+				x=random.randint(0,7)
+				y=random.randint(0,7)
+				if canPut(x,y):
+					break
+
+			put(x,y)
+			reverseStone(x,y)
+
+			drawingReversi()
+
+			print"next Player 1"
+
+			turn= not turn
+
+
+
+
+

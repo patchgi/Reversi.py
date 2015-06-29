@@ -141,17 +141,29 @@ if __name__=="__main__":
 	drawingReversi()
 
 	while True:
+		canCount=0
 		if turn:
+
+			for i in xrange(8):
+				for j in xrange(8):
+					if canPut(i,j):
+						canCount+=1;
+			if canCount==0:
+				print "pass"
+				print "next Player 1"
+				turn=not turn
+				break
 			input=raw_input()
 			time.sleep(1)
 	
 			if input!= None:
 				data=input.split(" ")
+
 				if len(data)==2:
 					if canPut(int(data[1]),int(data[0])):
 						put(int(data[1]),int(data[0]))
 						reverseStone(int(data[1]),int(data[0]))
-					
+
 						drawingReversi()
 
 						print"next Player 2"
@@ -163,6 +175,16 @@ if __name__=="__main__":
 				else:
 					print "Syntax Error(posX(0<=posX<FIELD) posY(0<=posY<FIELD))"
 		else:
+
+			for i in xrange(8):
+				for j in xrange(8):
+					if canPut(i,j):
+						canCount+=1;
+			if canCount==0:
+				print "pass"
+				print "next Player 1"
+				turn=not turn
+				break
 			time.sleep(1)
 			x=0
 			y=0

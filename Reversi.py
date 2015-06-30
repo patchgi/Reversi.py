@@ -18,11 +18,11 @@ def drawingReversi():
 	for j in xrange(FIELD):
 		for i in xrange(FIELD):
 			if cells[j][i]==0:
-				raw[j]+="0"
+				raw[j]+="_"
 			elif cells[j][i]==1:
-				raw[j]+="1"
+				raw[j]+="o"
 			else:
-				raw[j]+="2"
+				raw[j]+="*"
 		print raw[j].decode("utf-8")
 	print raw[FIELD]
 

@@ -130,7 +130,6 @@ def reverseStone(_posX, _posY):
     if canPutStone(_posX, _posY, 1, 1):
         reverse(_posX, _posY, 1, 1)
 
-
 if __name__=="__main__":
 	data=0
 	cells [3][3]=1
@@ -145,6 +144,7 @@ if __name__=="__main__":
 	drawingReversi()
 
 	while True:
+		#judgeGame
 		if playCount==60:
 			for i in xrange(FIELD):
 				for j in xrange(FIELD):
@@ -162,13 +162,38 @@ if __name__=="__main__":
 
 			else:
 				print "DRAW"
-
-
-
-
 		canCount=0
 		if turn:
+			for i in xrange(8):
+				for j in xrange(8):
+					if canPut(i,j):
+						canCount+=1
+			if canCount==0:
+				print "pass"
+				print "next Player 1"
+				turn=not turn
+				break
+			time.sleep(.1)
+			x=0
+			y=0
+			while(True):
+				x=random.randint(0,7)
+				y=random.randint(0,7)
+				if canPut(x,y):
+					break
 
+			put(x,y)
+			playCount+=1
+			reverseStone(x,y)
+
+			print str(y)+" "+str(x)
+
+			drawingReversi()
+
+			print"next Player 2"
+
+			turn= not turn
+			"""
 			for i in xrange(8):
 				for j in xrange(8):
 					if canPut(i,j):
@@ -179,7 +204,7 @@ if __name__=="__main__":
 				turn=not turn
 				break
 			input=raw_input()
-			time.sleep(1)
+			time.sleep(.1)
 	
 			if input!= None:
 				data=input.split(" ")
@@ -200,18 +225,19 @@ if __name__=="__main__":
 						print "not putable"
 				else:
 					print "Syntax Error(posX(0<=posX<FIELD) posY(0<=posY<FIELD))"
+					"""
 		else:
 
 			for i in xrange(8):
 				for j in xrange(8):
 					if canPut(i,j):
-						canCount+=1;
+						canCount+=1
 			if canCount==0:
 				print "pass"
 				print "next Player 1"
 				turn=not turn
 				break
-			time.sleep(1)
+			time.sleep(.1)
 			x=0
 			y=0
 			while(True):
@@ -230,4 +256,4 @@ if __name__=="__main__":
 
 			print"next Player 1"
 
-			turn= not tur
+			turn= not turn

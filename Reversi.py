@@ -170,7 +170,6 @@ if __name__=="__main__":
 			else:
 				print "DRAW"
 				break
-		print passCount
 
 		canCount=0
 		if turn:

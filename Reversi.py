@@ -140,6 +140,7 @@ if __name__=="__main__":
 	playCount=0
 	blackStone=0
 	whiteStone=0
+	passCount=0
 
 
 	drawingReversi()
@@ -148,7 +149,7 @@ if __name__=="__main__":
 		#judgeGame
 
 
-		if playCount==60:
+		if playCount==60 or passCount==2:
 			for i in xrange(FIELD):
 				for j in xrange(FIELD):
 					if cells[i][j]==1:
@@ -169,16 +170,19 @@ if __name__=="__main__":
 			else:
 				print "DRAW"
 				break
-				
+		print passCount
+
 		canCount=0
 		if turn:
+			
 			for i in xrange(8):
 				for j in xrange(8):
 					if canPut(i,j):
 						canCount+=1
 			if canCount==0:
 				print "pass"
-				print "next Player 1"
+				passCount+=1
+				print "next Player 2"
 				
 				turn=not turn
 			
@@ -192,6 +196,7 @@ if __name__=="__main__":
 					break
 
 			put(x,y)
+			passCount=0
 			playCount+=1
 			reverseStone(x,y)
 
@@ -209,9 +214,10 @@ if __name__=="__main__":
 						canCount+=1;
 			if canCount==0:
 				print "pass"
-				print "next Player 1"
+				print "next Player 2"
+				passCount+=1
 				turn=not turn
-				break
+
 			input=raw_input()
 			time.sleep(.1)
 	
@@ -221,6 +227,7 @@ if __name__=="__main__":
 				if len(data)==2:
 					if canPut(int(data[1]),int(data[0])):
 						put(int(data[1]),int(data[0]))
+						passCount=0
 						playCount+=1
 						reverseStone(int(data[1]),int(data[0]))
 
@@ -245,6 +252,7 @@ if __name__=="__main__":
 			if canCount==0:
 				print "pass"
 				print "next Player 1"
+				passCount+=1
 				turn=not turn
 				
 
@@ -258,6 +266,7 @@ if __name__=="__main__":
 					break
 
 			put(x,y)
+			passCount=0
 			playCount+=1
 			reverseStone(x,y)
 

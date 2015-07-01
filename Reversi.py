@@ -141,10 +141,13 @@ if __name__=="__main__":
 	blackStone=0
 	whiteStone=0
 
+
 	drawingReversi()
 
 	while True:
 		#judgeGame
+
+
 		if playCount==60:
 			for i in xrange(FIELD):
 				for j in xrange(FIELD):
@@ -152,16 +155,21 @@ if __name__=="__main__":
 						blackStone+=1
 					if cells[i][j]==2:
 						whiteStone+=1
+			print " BLACK "+str(blackStone)
+			print " WHITE "+str(whiteStone)
 
 			if blackStone>whiteStone:
 				print "black WIN"
 				break
+
 			elif blackStone<whiteStone:
 				print "white WIN"
 				break
 
 			else:
 				print "DRAW"
+				break
+				
 		canCount=0
 		if turn:
 			for i in xrange(8):
@@ -171,8 +179,9 @@ if __name__=="__main__":
 			if canCount==0:
 				print "pass"
 				print "next Player 1"
+				
 				turn=not turn
-				break
+			
 			time.sleep(.1)
 			x=0
 			y=0
@@ -232,11 +241,13 @@ if __name__=="__main__":
 				for j in xrange(8):
 					if canPut(i,j):
 						canCount+=1
+
 			if canCount==0:
 				print "pass"
 				print "next Player 1"
 				turn=not turn
-				break
+				
+
 			time.sleep(.1)
 			x=0
 			y=0
